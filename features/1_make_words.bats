@@ -1,4 +1,6 @@
 #!/usr/bin/env bats
+load '/helpers/bats-support/load'
+load '/helpers/bats-assert/load'
 
 @test "'make words' outputs a frequency map" {
   expected_frequency_map=$(cat <<-EOF

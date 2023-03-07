@@ -27,4 +27,5 @@ bdd: ## Tests word-cloud features.
 		-v $(PWD):/app --rm "$(TESTS_IMAGE_NAME)" /app/features
 
 _build_test_docker_image:
-	docker build --quiet -f $(TESTS_IMAGE_DOCKERFILE) -t "$(TESTS_IMAGE_NAME)" .
+	>&2 echo "=====> Setting up test environment; please wait."
+	docker build --quiet -f $(TESTS_IMAGE_DOCKERFILE) -t "$(TESTS_IMAGE_NAME)" . > /dev/null
