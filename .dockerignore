@@ -1,0 +1,4 @@
+*
+!*.go
+!features
+!Makefile

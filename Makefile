@@ -23,8 +23,15 @@ usage: ## Prints this help text.
 
 bdd: _build_test_docker_image
 bdd: ## Tests word-cloud features.
-	docker run -v $(PWD)/features:/sut --rm "$(TESTS_IMAGE_NAME)" /sut
+	docker run -v /var/run/docker.sock:/var/run/docker.sock \
+		-v $(PWD):/app --rm "$(TESTS_IMAGE_NAME)" /app/features
+
+unit:
+	go test -failfast $(PWD)/sources/...
+
+integration:
+	INTEGRATION=1 go test -failfast $(PWD)/sources/...
 
 _build_test_docker_image:
-	{ test -z "$(REBUILD)" && test -n "$$(docker image ls --quiet "$(TESTS_IMAGE_NAME)")"; } && exit 0; \
-	docker image build -t "$(TESTS_IMAGE_NAME)" - < $(TESTS_IMAGE_DOCKERFILE)
+	>&2 echo "=====> Setting up test environment; please wait."
+	docker build --quiet -f $(TESTS_IMAGE_DOCKERFILE) -t "$(TESTS_IMAGE_NAME)" . > /dev/null
