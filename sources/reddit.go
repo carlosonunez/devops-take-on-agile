@@ -3,6 +3,9 @@ package sources
 import (
 	"encoding/json"
 	"fmt"
+	"io"
+	"net/http"
+	"strings"
 )
 
 // RedditComment is a comment returned from Pushshift.
@@ -23,13 +26,51 @@ type RedditCommentFetcher interface {
 
 // RedditClient is a simple Reddit client.
 type RedditClient struct {
-	// PushshiftQueryString is the query string to use to fetch comments.
-	PushshiftQueryString string
+	// PushshiftBaseURL is the base URL for the Pushshift query
+	PushshiftBaseURL string
+
+	// PushshiftQueryParameters are query params to provide to
+	// Pushshift.
+	PushshiftQueryParameters string
 }
 
 // GetComments gets comments from Pushshift.
 func (c *RedditClient) GetComments() ([]byte, error) {
-	return []byte("wip"), nil
+	url := fmt.Sprintf("%s?%s", c.PushshiftBaseURL, c.PushshiftQueryParameters)
+	fmt.Printf("Getting comments from %s\n", url)
+	resp, err := http.Get(url)
+	resp.Header.Set("User-Agent", "curl/7.85.0")
+	if err != nil {
+		return []byte{}, err
+	}
+	if resp.StatusCode != 200 {
+		return []byte{}, fmt.Errorf("expected 200; got %d", resp.StatusCode)
+	}
+	defer resp.Body.Close()
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return []byte{}, err
+	}
+	fmt.Printf("We got: %s", body)
+	return body, nil
+}
+
+func NewRedditClient(qp string) *RedditClient {
+	defaultParams := strings.Join([]string{"q=\"devops agile\"",
+		"subreddit=devops",
+		"fields=\"author,body\"",
+		"metadata=false",
+	}, "&")
+	var params string
+	if qp != "" {
+		params = qp
+	} else {
+		params = defaultParams
+	}
+	return &RedditClient{
+		PushshiftBaseURL:         "https://api.pushshift.io/reddit/comment/search",
+		PushshiftQueryParameters: params,
+	}
 }
 
 func commentListFromJSON(comments []byte) ([]string, error) {

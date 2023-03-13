@@ -26,6 +26,12 @@ bdd: ## Tests word-cloud features.
 	docker run -v /var/run/docker.sock:/var/run/docker.sock \
 		-v $(PWD):/app --rm "$(TESTS_IMAGE_NAME)" /app/features
 
+unit:
+	go test -failfast $(PWD)/sources/...
+
+integration:
+	INTEGRATION=1 go test -failfast $(PWD)/sources/...
+
 _build_test_docker_image:
 	>&2 echo "=====> Setting up test environment; please wait."
 	docker build --quiet -f $(TESTS_IMAGE_DOCKERFILE) -t "$(TESTS_IMAGE_NAME)" . > /dev/null
