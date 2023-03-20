@@ -138,13 +138,13 @@ var stopWords = map[string]int{
 func countWordsInComments(cl []string) map[string]int {
 	counts := map[string]int{}
 	moreThanOne := map[string]int{}
-	re := regexp.MustCompile("^[a-z]{2,}$")
+	wholeWord := regexp.MustCompile("^[a-z]{2,}$")
 	special := regexp.MustCompile(`[^a-zA-Z0-9]+`)
 	for _, c := range cl {
 		for _, w := range strings.Split(special.ReplaceAllString(c, " "), " ") {
 			w = special.ReplaceAllString(w, "")
 			w = strings.ToLower(w)
-			if !re.Match([]byte(w)) {
+			if !wholeWord.Match([]byte(w)) {
 				continue
 			}
 			if _, found := stopWords[w]; found {
