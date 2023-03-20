@@ -10,7 +10,7 @@ import (
 
 // HNComment is a comment returned from Algolia.
 type HNComment struct {
-	CommentText string
+	CommentText string `json:"comment_text"`
 }
 
 // HNCommentData is data returned from a Algolia comment query.
@@ -73,20 +73,6 @@ func NewHNClient(qp string) *HNClient {
 	}
 }
 
-func commentListFromJSONHN(comments []byte) ([]string, error) {
-	var r HNCommentData
-	err := json.Unmarshal(comments, &r)
-	if err != nil {
-		return []string{}, err
-	}
-	fmt.Printf("comments: %d\n", len(r.Hits))
-	var cl []string
-	for _, d := range r.Hits {
-		cl = append(cl, d.CommentText)
-	}
-	return cl, nil
-}
-
 func GenerateWordCountHackerNews(client HNCommentFetcher) (map[string]int, error) {
 	counts := map[string]int{}
 	comments, err := client.GetComments()
@@ -98,4 +84,17 @@ func GenerateWordCountHackerNews(client HNCommentFetcher) (map[string]int, error
 		return counts, err
 	}
 	return countWordsInComments(commentList), nil
+}
+
+func commentListFromJSONHN(comments []byte) ([]string, error) {
+	var r HNCommentData
+	err := json.Unmarshal(comments, &r)
+	if err != nil {
+		return []string{}, err
+	}
+	var cl []string
+	for _, d := range r.Hits {
+		cl = append(cl, d.CommentText)
+	}
+	return cl, nil
 }

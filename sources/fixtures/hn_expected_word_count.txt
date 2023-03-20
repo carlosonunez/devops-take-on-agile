@@ -17,14 +17,12 @@
 2 eight
 2 engagements
 2 enjoy
-2 es6
 2 express
 2 get
 2 greatly
 2 help
 2 helpful
 2 hn
-2 html5
 2 information
 2 integration
 2 java
@@ -41,7 +39,6 @@
 2 methodologies
 2 modern
 2 needs
-2 neo4j
 2 nginx
 2 node
 2 nofollow
@@ -74,12 +71,11 @@
 2 system
 2 team
 2 teams
+2 toby
 2 tobych
 2 typescript
-2 u5cgnwjm
 2 unless
 2 variety
-2 w3c
 2 working
 2 www
 2 xen
@@ -104,10 +100,10 @@
 3 relocate
 3 reviews
 3 roles
-3 rã©sumã©
 3 security
 3 solutions
 3 sql
+3 sum
 3 way
 3 willing
 3 years
@@ -123,13 +119,13 @@
 4 js
 4 link
 4 norway
+4 ndelag
 4 part
 4 projects
 4 rest
 4 sgx
 4 things
-4 trã¸ndelag
-4 vn1s
+4 tr
 4 web
 4 well
 4 within
@@ -153,5 +149,4 @@
 11 https
 11 work
 18 quot
-19 x27
-48 x2f
+
