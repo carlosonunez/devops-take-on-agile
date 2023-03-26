@@ -1,6 +1,5 @@
 2 addition
 2 address
-2 architect
 2 around
 2 available
 2 backend
@@ -46,7 +45,6 @@
 2 often
 2 pl
 2 possible
-2 post
 2 postfix
 2 pre
 2 pride
@@ -65,13 +63,11 @@
 2 since
 2 solving
 2 something
-2 source
 2 standards
 2 stoked
 2 system
 2 team
 2 teams
-2 toby
 2 tobych
 2 typescript
 2 unless
@@ -92,7 +88,7 @@
 3 javascript
 3 linux
 3 location
-3 performance
+2 performance
 3 php
 3 prefer
 3 problems
@@ -100,10 +96,9 @@
 3 relocate
 3 reviews
 3 roles
-3 security
+2 security
 3 solutions
 3 sql
-3 sum
 3 way
 3 willing
 3 years
@@ -119,13 +114,11 @@
 4 js
 4 link
 4 norway
-4 ndelag
 4 part
 4 projects
 4 rest
 4 sgx
 4 things
-4 tr
 4 web
 4 well
 4 within
@@ -133,13 +126,13 @@
 4 xcrty
 5 design
 5 development
-5 devops
+4 devops
 5 experience
 5 including
 5 software
-5 stuff
+4 stuff
 5 technologies
-6 agile
+5 agile
 6 code
 6 ve
 8 github
@@ -147,6 +140,9 @@
 9 time
 10 com
 11 https
-11 work
-18 quot
-
+10 work
+10 quot
+3 sum
+2 toby
+4 tr
+4 ndelag
